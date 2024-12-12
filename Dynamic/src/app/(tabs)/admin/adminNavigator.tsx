@@ -2,10 +2,10 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AdminStack from "./dashboard";
 import TripManagementScreen from "./TripManagementScreen";
-import GeofenceManagementScreen from "./GeoFenceManageMent";
-import CreateTripScreen from "./CreateTripScreen";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
-import { NavigationContainer, NavigationIndependentTree } from "@react-navigation/native";
+import GeoFenceManagementScreen from "./GeoFenceManageMent";
+import CreateTripScreen from "./CreateTripScreen"; // Ensure CreateTripScreen is a valid React component
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DriverLocationScreen from "./DriverLocationScreen";
 import LogoutScreen from "../auth/LogoutScreen";
@@ -13,8 +13,6 @@ import LogoutScreen from "../auth/LogoutScreen";
 const Tab = createBottomTabNavigator();
 
 const AdminNavigator = () => (
-  
-    
   <Tab.Navigator
     initialRouteName="Dashboard"
     screenOptions={{
@@ -52,7 +50,7 @@ const AdminNavigator = () => (
     />
     <Tab.Screen
       name="Geofence Management"
-      component={GeofenceManagementScreen}
+      component={GeoFenceManagementScreen}
       options={{
         tabBarLabel: "Geofence",
         tabBarIcon: ({ color, size }) => (
@@ -64,6 +62,7 @@ const AdminNavigator = () => (
         ),
       }}
     />
+    
     <Tab.Screen
       name="Trip Management"
       component={TripManagementScreen}
@@ -85,11 +84,6 @@ const AdminNavigator = () => (
       }}
     />
   </Tab.Navigator>
-  
-  
-  
-  
-  
 );
 
 export default AdminNavigator;

@@ -1,5 +1,5 @@
 import React, { useState,useContext } from "react";
-import { View, Text, TextInput, Button, StyleSheet ,Alert} from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from "react-native";
 import { useAuth } from "../../../context/AuthContext";
 import { useRoute, useNavigation, RouteProp } from "@react-navigation/native";
 import { NavigationProp } from '@react-navigation/native';
@@ -46,14 +46,30 @@ const OTPVerification = () => {
       );
     }
   };
+  const showSplashScreen = (user: any) => {
+    setTimeout(() => {
+      // Display splash screen
+      navigation.navigate("SplashScreen" as never);
 
+      // After 2 seconds, navigate to the appropriate screen
+      navigation.reset({
+        index: 0,
+        routes: [
+          { name: user.role === "admin" ? "AdminNavigator" as never : "DriverNavigator" as never },
+        ],
+      });
+    }, 2000); 
+  };
   return (
     <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image source={require("../../../../assets/2.png")} style={styles.logo} />
+      </View>
       <Text style={styles.title}>OTP Verification</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter OTP"
-        keyboardType="numeric"
+        keyboardType="phone-pad"
         value={otp}
         onChangeText={setOTP}
       />
@@ -64,6 +80,14 @@ const OTPVerification = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 16 },
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 32,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
